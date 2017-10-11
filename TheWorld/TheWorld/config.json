@@ -1,0 +1,12 @@
+{
+  "MailSettings": {
+    "ToAddress": "omarjavier15@gmail.com"
+  },
+  "ConnectionStrings": {
+    "WorldContextConnection": "Server=localhost\\SQLEXPRESS;Database=TheWorld;Trusted_Connection=True;MultipleActiveResultSets=true;"
+  },
+  "Keys": {
+    "BingKey": "XYZ",
+    "GoogleMapsKey": "XYZ"
+  }
+}
