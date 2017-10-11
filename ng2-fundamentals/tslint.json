@@ -1,0 +1,33 @@
+{
+    "defaultSeverity": "warning",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "rules": {
+        "ordered-imports": [
+            false
+        ],
+        "quotemark": [
+            true, "single"
+        ],
+        "whitespace": [
+            false
+        ],
+        "no-trailing-whitespace": [
+            false
+        ],
+        "object-literal-sort-keys": [
+            false
+        ],
+        "curly": false,
+        "trailing-comma": [
+            false
+        ],
+        "member-access": [
+            false
+        ],
+        "arrow-parens": false,
+        "eofline": false
+    },
+    "rulesDirectory": []
+}
