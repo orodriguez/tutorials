@@ -1,6 +1,9 @@
-﻿let generateSamples milliseconds frequency =
+﻿#load @"..\packages\FSharp.Charting.0.91.1\lib\net45\FSharp.Charting.fsx"
+open FSharp.Charting
+
+let generateSamples milliseconds frequency =
   let sampleRate = 44100.
-  let sixteenBitSampleLimit = 327667.
+  let sixteenBitSampleLimit = 32767.
   let volume = 0.8
   let toAmplitude x = 
     x
@@ -13,3 +16,6 @@
   let numOfSamples = milliseconds / 1000. * sampleRate
   let requiredSamples = seq { 1.0..numOfSamples }
   Seq.map toAmplitude requiredSamples
+
+let points = generateSamples 150. 440.
+points |> Chart.Line
