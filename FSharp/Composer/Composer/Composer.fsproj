@@ -54,6 +54,7 @@
     <None Include="Script.fsx" />
     <Content Include="packages.config" />
     <None Include="signal_generator.fsx" />
+    <None Include="wave_packer.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Charting">
