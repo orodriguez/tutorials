@@ -10,7 +10,7 @@ let test p str =
 
 type MeasureFaction = Half | Quarter | Eighth | Sixteenth | Thirtyseconth
 type Length = { faction: MeasureFaction; extended: bool }
-type Note = A | ASharp | B | C | CSharp | DSharp | E | F | FSharp | G | GSharp
+type Note = A | ASharp | B | C | CSharp | D | DSharp | E | F | FSharp | G | GSharp
 type Octave = One | Two | Three
 type Sound = Rest | Tone of node: Note * octave: Octave
 type Token = { lenght: Length; sound: Sound }
@@ -32,4 +32,30 @@ let plength =
     pextendedparser
     (fun t e -> { faction = t; extended = e })
 
-test plength aspiration
+let pnotsharpablenote = anyOf "be" |>> (function 
+  | 'b' -> B
+  | 'e' -> E
+  | unknown -> sprintf "Unknown note %c" unknown |> failwith)
+
+let psharp = (stringReturn "#" true) <|> (stringReturn "" false)
+
+let psharpnote = pipe2 
+                  psharp 
+                  (anyOf "acdfg") 
+                  (fun isSharp note -> 
+                    match (isSharp, note) with
+                    | (false, 'a') -> A
+                    | (true, 'a') -> ASharp
+                    | (false, 'c') -> C
+                    | (true, 'c') -> CSharp
+                    | (false, 'd') -> D
+                    | (true, 'd') -> DSharp
+                    | (false, 'f') -> F
+                    | (true, 'f') -> FSharp
+                    | (false, 'g') -> G
+                    | (true, 'g') -> GSharp
+                    | (_, unknown) -> sprintf "Unknow note %c" unknown |> failwith)
+
+let pnote = pnotsharpablenote <|> psharpnote
+
+test pnote "b"
