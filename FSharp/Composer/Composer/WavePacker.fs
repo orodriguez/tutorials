@@ -1,7 +1,8 @@
-﻿#load "signal_generator.fsx"
+﻿module WavePacker
+
 open System.IO
 open System.Text
-open Signal_generator
+open SignalGenerator
 
 let pack (d:int16[]) =
   let stream = new MemoryStream();

@@ -1,5 +1,4 @@
-﻿#r @"..\packages\FParsec.1.0.3\lib\net40-client\FParsecCS.dll"
-#r @"..\packages\FParsec.1.0.3\lib\net40-client\FParsec.dll"
+﻿module Parsing
 
 open FParsec
 
