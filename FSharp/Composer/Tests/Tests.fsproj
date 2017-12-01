@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="SignalGeneratorTest.fs" />
     <Content Include="packages.config" />
+    <Compile Include="WavePackerTest.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
