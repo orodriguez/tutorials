@@ -8,11 +8,11 @@ let test p str =
   | Failure(errorMsg, _, _) -> printf "Failure: %s" errorMsg
 
 type MeasureFaction = Half | Quarter | Eighth | Sixteenth | Thirtyseconth
-type Length = { faction: MeasureFaction; extended: bool }
+type Length = { fraction: MeasureFaction; extended: bool }
 type Note = A | ASharp | B | C | CSharp | D | DSharp | E | F | FSharp | G | GSharp
 type Octave = One | Two | Three
 type Sound = Rest | Tone of note: Note * octave: Octave
-type Token = { lenght: Length; sound: Sound }
+type Token = { length: Length; sound: Sound }
 
 let pmeasurefaction = 
   (stringReturn "2" Half)
@@ -27,7 +27,7 @@ let plength =
   pipe2
     pmeasurefaction
     pextendedparser
-    (fun t e -> { faction = t; extended = e })
+    (fun t e -> { fraction = t; extended = e })
 
 let pnotsharpablenote = anyOf "be" |>> (function 
   | 'b' -> B
@@ -65,13 +65,11 @@ let ptone = pipe2 pnote poctave (fun n o -> Tone(note = n, octave = o))
 
 let prest = stringReturn "-" Rest
 
-let ptoken = pipe2 plength (prest <|> ptone) (fun l t -> { lenght = l; sound= t })
+let ptoken = pipe2 plength (prest <|> ptone) (fun l t -> { length = l; sound= t })
 
 let pscore = sepBy ptoken (pstring " ")
 
 let parse (score:string) =    
-    match score.Trim() |> run pscore with
-        | Success(result, _, _)   -> Choice1Of2 result
-        | Failure(errorMsg, _, _) -> Choice2Of2 errorMsg
-
-test pscore "8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2"
+  match score.Trim() |> run pscore with
+    | Success(result, _, _)   -> Choice1Of2 result
+    | Failure(errorMsg, _, _) -> Choice2Of2 errorMsg
