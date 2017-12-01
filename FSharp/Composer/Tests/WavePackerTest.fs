@@ -22,8 +22,6 @@ type ``when packing an audio file`` ()=
     let first4Chars = Encoding.ASCII.GetString(bucket)
     Assert.Equal("RIFF", first4Chars)
   
-  
-  
   [<Fact>]
   member this.``file size is corrent`` ()=
     let formatOverhead = 44.

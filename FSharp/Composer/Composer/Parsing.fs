@@ -69,4 +69,9 @@ let ptoken = pipe2 plength (prest <|> ptone) (fun l t -> { lenght = l; sound= t 
 
 let pscore = sepBy ptoken (pstring " ")
 
+let parse (score:string) =    
+    match score.Trim() |> run pscore with
+        | Success(result, _, _)   -> Choice1Of2 result
+        | Failure(errorMsg, _, _) -> Choice2Of2 errorMsg
+
 test pscore "8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2"
