@@ -26,10 +26,3 @@ type ``when parsing a score`` ()=
         List.head tokens |> assertFirstToken
         List.item 1 tokens |> assertSecondToken
         ()
-
-[<TestFixture>]
-type ``When calculating the frequency of notes`` ()=
-  
-  [<Test>]
-  member this.``A2 should be 440`` ()=
-    Assert.AreEqual(440., Tone (A,Two) |> frequency, 0.1)
